@@ -1,3 +1,3 @@
 fn main() {
-    println!("Hello, world!");
+    println!("Viam64 - A Commodore 64 emulator!");
 }
