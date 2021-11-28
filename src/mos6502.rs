@@ -4,8 +4,8 @@ pub struct Mos6502 {
     a_reg : u8,
     x_reg : u8,
     y_reg : u8,
-    sp_reg : u8,
-    pc_reg : u8,
+    sp_reg : u16,
+    pc_reg : u16,
     ps_reg : u8,
 
     mem : [u8; MEM_SIZE_64K]
