@@ -25,7 +25,8 @@ impl Mos6502 {
     }      
 }
 
-pub fn soft_reset(cpu : &mut Mos6502) {
+pub fn reset(cpu : &mut Mos6502) {
+    //not accurate however good enough for now
     cpu.a_reg = 0;
     cpu.x_reg = 0;
     cpu.y_reg = 0;
@@ -44,7 +45,7 @@ mod tests {
     }
 
     #[test]
-    fn should_soft_reset_function_set_registers_values_to_default() {
+    fn should_reset_function_set_registers_values_to_default() {
         //Arrange
         let mut cpu = Mos6502::new();
         cpu.a_reg = 3;
@@ -54,7 +55,7 @@ mod tests {
         cpu.pc_reg = 45;
         cpu.ps_reg = 124;
         //Act
-        soft_reset(&mut cpu);
+        reset(&mut cpu);
         //Assert
         assert_eq!(cpu.a_reg, 0);
         assert_eq!(cpu.x_reg, 0);
