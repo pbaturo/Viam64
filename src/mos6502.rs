@@ -32,6 +32,18 @@ impl Mos6502 {
             ps_reg : 0,
         }
     }      
+    
+    pub fn get_n_sp_flag(self : &Self) -> bool {
+        return self.sp_reg & 0b1000_0000 != 0;
+    }
+    
+    fn set_n_sp_flag(self : &mut Self, flag : bool) {
+        if flag { 
+            self.sp_reg |= 0b1111_1111 } 
+        else {
+            self.sp_reg &= 0b0111_1111 
+        };
+    }
 }
 
 pub fn reset(cpu : &mut Mos6502) {
@@ -72,5 +84,21 @@ mod tests {
         assert_eq!(cpu.sp_reg, 0);
         assert_eq!(cpu.pc_reg, 0);
         assert_eq!(cpu.ps_reg, 0);
+    }
+    
+    #[test]
+    fn should_setting_n_sp_flag_as_on_work() {
+        let mut cpu = Mos6502::new();
+        cpu.sp_reg = 0x3F;
+        cpu.set_n_sp_flag(true);
+        assert_eq!(cpu.get_n_sp_flag(),true);
+    }
+
+    #[test]
+    fn should_setting_n_sp_flag_as_off_work() {
+        let mut cpu = Mos6502::new();
+        cpu.sp_reg = 0xF7;
+        cpu.set_n_sp_flag(false);
+        assert_eq!(cpu.get_n_sp_flag(), false);
     }
 }
