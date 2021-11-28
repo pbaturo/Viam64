@@ -1,5 +1,17 @@
 pub const MEM_SIZE_64K : usize = 1024*64;
 
+pub struct Ram {
+    mem : [u8; MEM_SIZE_64K]
+}
+
+impl Ram {
+    pub fn new() -> Self {
+        Self {
+            mem : [0; MEM_SIZE_64K]
+        }
+    }
+}
+
 pub struct Mos6502 {
     a_reg : u8,
     x_reg : u8,
@@ -7,8 +19,6 @@ pub struct Mos6502 {
     sp_reg : u16,
     pc_reg : u16,
     ps_reg : u8,
-
-    mem : [u8; MEM_SIZE_64K]
 }       
 
 impl Mos6502 {
@@ -20,7 +30,6 @@ impl Mos6502 {
             sp_reg : 0,
             pc_reg : 0,
             ps_reg : 0,
-            mem : [0; MEM_SIZE_64K]
         }
     }      
 }
